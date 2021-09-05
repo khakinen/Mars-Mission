@@ -27,7 +27,7 @@ namespace RoverInTheMars
 
                 var commandText = File.ReadAllText("input.txt");
 
-                await StartMission(host.Services, commandText, 4);
+                await StartMission(host.Services, commandText);
 
                 await host.RunAsync();
 
@@ -53,7 +53,7 @@ namespace RoverInTheMars
           Host.CreateDefaultBuilder(args)
            .ConfigureServices(ConfigureServices);
 
-        private static async Task StartMission(IServiceProvider services, string commandText, int roverCount)
+        private static async Task StartMission(IServiceProvider services, string commandText)
         {
             using IServiceScope serviceScope = services.CreateScope();
 
@@ -61,7 +61,7 @@ namespace RoverInTheMars
 
             var missionFactory = provider.GetRequiredService<IMissionFactory>();
 
-            var mission = missionFactory.CreateMission(commandText, roverCount);
+            var mission = missionFactory.CreateMission(commandText);
 
             var missionStarter = provider.GetRequiredService<IMissionStarter>();
 
