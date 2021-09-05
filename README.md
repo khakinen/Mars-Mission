@@ -9,6 +9,10 @@
 
   * mars-mission/RoverInTheMars.Test> **dotnet test** [ENTER]
 
+* To change the input command, edit this file :
+
+  * mars-mission/RoverInTheMars/input.txt
+
 Remarks:
 
 * In case of move commands is sent to rovers which requires moving to the same grid square concurrently, they are waiting each other to avoid colliding. 
