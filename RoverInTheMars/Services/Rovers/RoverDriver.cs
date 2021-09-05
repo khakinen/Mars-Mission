@@ -5,7 +5,7 @@ using RoverInTheMars.Models;
 using RoverInTheMars.Services.Instructions;
 using RoverInTheMars.Services.Traffic;
 
-namespace RoverInTheMars.Rovers
+namespace RoverInTheMars.Services.Rovers
 {
     public class RoverDriver : IRoverDriver
     {

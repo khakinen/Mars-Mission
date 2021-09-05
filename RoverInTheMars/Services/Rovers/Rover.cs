@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using RoverInTheMars.Models;
 
-namespace RoverInTheMars.Rovers
+namespace RoverInTheMars.Services.Rovers
 {
     public class Rover : IRover
     {
