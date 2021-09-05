@@ -42,7 +42,6 @@ namespace RoverInTheMars.Services.Traffic
             {
                 _trafficMap[(initialPosition.X, initialPosition.Y)].IsBusy = true;
             }
-
         }
 
         public async Task PlaceSafe(string roverName, Position currentPosition, Position nextPosition, Action assignPosition, CancellationToken cancellationToken = default)

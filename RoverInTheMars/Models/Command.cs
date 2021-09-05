@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace RoverInTheMars.Models
+﻿namespace RoverInTheMars.Models
 {
     public class Command
     {
-        public Dimension PlateauDimension { get; set; }
-        public RoverCommand[] RowerCommands { get; set; }
+        public virtual Dimension PlateauDimension { get; set; }
+        public virtual RoverCommand[] RoverCommands { get; set; }
     }
 }

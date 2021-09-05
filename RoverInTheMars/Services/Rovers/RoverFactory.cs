@@ -11,12 +11,12 @@ namespace RoverInTheMars.Services.Rovers
             _serviceScopeFactory = serviceScopeFactory;
         }
 
-        public Rover CreateRover()
+        public IRover CreateRover()
         {
             using IServiceScope serviceScope = _serviceScopeFactory.CreateScope();
             var provider = serviceScope.ServiceProvider;
 
-            return provider.GetRequiredService<Rover>();
+            return provider.GetRequiredService<IRover>();
         }
     }
 }

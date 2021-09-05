@@ -10,6 +10,8 @@ namespace RoverInTheMars.Services.Rovers
 
         Position CurrentPosition { get; }
 
+        string Name { get; }
+
         Task Go(RoverCommand roverCommand, Dimension plateauDimension, string roverName, CancellationToken cancellationToken = default);
     }
 }

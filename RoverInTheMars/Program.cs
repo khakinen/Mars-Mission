@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using RoverInTheMars.Models;
 using RoverInTheMars.Services.Instructions;
 using RoverInTheMars.Services.Missions;
 using RoverInTheMars.Services.Parsers;
@@ -86,10 +87,13 @@ namespace RoverInTheMars
                 .AddSingleton(new TrafficeConfiguration() { MovementAttemptDelayInMiliseconds = 1000 })
 
                 .AddSingleton<ICommandParser, CommandParser>()
+                .AddSingleton<IContentParser<Dimension>, PlateauDimensionParser>()
+                .AddSingleton<IContentParser<RoverCommand>, RoverCommandParser>()
+
                 .AddSingleton<ICommandValidator, CommandValidator>()
 
                 .AddScoped<IRoverDriver, RoverDriver>()
-                .AddScoped<Rover>()
+                .AddScoped<IRover, Rover>()
 
                 .AddSingleton<IInstructionValidator, InstructionValidator>()
                 .AddSingleton<IInstructionProcessorProvider, InstructionProcessorProvider>()

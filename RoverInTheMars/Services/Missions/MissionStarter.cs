@@ -34,15 +34,14 @@ namespace RoverInTheMars.Services.Missions
 
                 _commandValidator.Validate(command, mission.Rovers.Length);
 
-                _trafficPolice.Start(command.PlateauDimension, command.RowerCommands.Select(rc => rc.InitialPosition));
+                _trafficPolice.Start(command.PlateauDimension, command.RoverCommands.Select(rc => rc.InitialPosition));
 
-                Parallel.For(0, command.RowerCommands.Length, (i, state) =>
+                Parallel.For(0, command.RoverCommands.Length, (i, state) =>
                 {
                     var roverName = $"[Rover{i}]";
 
-                    mission.Rovers[i].Go(command.RowerCommands[i], command.PlateauDimension, roverName, cancellationToken);
+                    mission.Rovers[i].Go(command.RoverCommands[i], command.PlateauDimension, roverName, cancellationToken);
                 });
-
 
                 await LogPositions(mission, cancellationToken = default);
             }

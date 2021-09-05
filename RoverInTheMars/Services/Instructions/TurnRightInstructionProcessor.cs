@@ -13,7 +13,7 @@ namespace RoverInTheMars.Services.Instructions
         {
             return new Position
             {
-                Direction = (Direction)(((int)currentPosition.Direction + 4) % 3),
+                Direction = (Direction)(((int)currentPosition.Direction + 1) % 4),
                 X = currentPosition.X,
                 Y = currentPosition.Y
             };

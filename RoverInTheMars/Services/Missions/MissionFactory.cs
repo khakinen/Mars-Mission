@@ -15,7 +15,7 @@ namespace RoverInTheMars.Services.Missions
 
         public Mission CreateMission(string commandText, int roverCount, CancellationToken cancellationToken = default)
         {
-            var rovers = new List<Rover>();
+            var rovers = new List<IRover>();
 
             for (int i = 0; i < roverCount; i++)
             {
