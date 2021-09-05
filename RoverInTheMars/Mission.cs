@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
@@ -42,11 +43,27 @@ namespace RoverInTheMars
 
                     rovers[i].Go(command.RowerCommands[i], command.PlateauDimension, roverName, cancellationToken);
                 });
+
+                Task.Run(async () =>
+                {
+                    while (!cancellationToken.IsCancellationRequested)
+                    {
+                        var sb = new StringBuilder();
+                        {
+                            sb.AppendLine("Current Positions:");
+                            sb.AppendJoin(" - ", rovers.Select(r => $"{r.Name}: {r.CurrentPosition}"));
+                            _logger.LogInformation(sb.ToString());
+                        }
+
+                        await Task.Delay(3000);
+                    }
+                });
             }
             catch (Exception)
             {
                 throw;
             }
+
 
         }
     }

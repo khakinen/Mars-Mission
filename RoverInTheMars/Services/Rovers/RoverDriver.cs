@@ -33,6 +33,7 @@ namespace RoverInTheMars.Rovers
         {
             try
             {
+                Name = roverName;
                 _currentPosition = roverCommand.InitialPosition;
 
                 for (int i = 0; i < roverCommand.Instructions.Length; i++)

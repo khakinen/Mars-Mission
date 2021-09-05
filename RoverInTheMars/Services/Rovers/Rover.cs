@@ -37,23 +37,27 @@ namespace RoverInTheMars.Rovers
                 await _roverDriver.Drive(roverCommand, plateauDimension, roverName, cancellationToken);
 
                 RoverStatus = RoverStatus.MissionCompleted;
+
+                _logger.LogInformation($"{roverName} : {RoverStatus} Last Position{CurrentPosition} ############## OK ##############");
             }
             catch (DriveOffException)
             {
                 RoverStatus = RoverStatus.AwaitingRescue;
 
-                _logger.LogError($"{roverName} : avoided drive-off! {RoverStatus}");
+                _logger.LogError($"{roverName} : avoided drive-off! {RoverStatus} Last Position{CurrentPosition} ############## DRIVE-OFF PLT. ##############");
 
             }
             catch (InvalidCommandException ex)
             {
                 RoverStatus = RoverStatus.AwaitingRescue;
 
-                _logger.LogError(ex, $"{roverName} : invalid command! {RoverStatus}");
+                _logger.LogError(ex, $"{roverName} : invalid command! {RoverStatus} Last Position{CurrentPosition}############## INVALID COMMAND ##############");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 RoverStatus = RoverStatus.AwaitingRescue;
+
+                _logger.LogError(ex, $"{roverName} : unknown Exception! {RoverStatus} Last Position{CurrentPosition}");
 
                 throw;
             }

@@ -28,16 +28,19 @@ namespace RoverInTheMars
             {
                 using IHost host = CreateHostBuilder(args).Build();
 
-                //var commandText = File.ReadAllText("input.txt");
-                var commandText = $"5 5{Environment.NewLine}"
-                    + $"1 2 N{Environment.NewLine}"
-                    + $"LMLTLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLM{Environment.NewLine}"
-                    + $"2 3 E{Environment.NewLine}"
-                    + $"LMRMLMRMLMRMRMRMRMRM{Environment.NewLine}"
-                    + $"4 3 W{Environment.NewLine}"
-                    + $"LMLMLMLMR{Environment.NewLine}"
-                    + $"0 3 E{Environment.NewLine}"
-                    + $"MMLMMLMMLMLMLMLMLMLMR{Environment.NewLine}";
+                var commandText = File.ReadAllText("input.txt");
+
+                //var commandText = $"5 5{Environment.NewLine}"
+                //    + $"1 2 N{Environment.NewLine}"
+                //    + $"LMLTLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLM{Environment.NewLine}"
+                //    + $"2 3 E{Environment.NewLine}"
+                //    + $"LMRMLMRMLMRMRMRMRMRM{Environment.NewLine}"
+                //    + $"4 3 W{Environment.NewLine}"
+                //    + $"LMLMLMLMR{Environment.NewLine}"
+                //    + $"0 3 E{Environment.NewLine}"
+                //    + $"MMLMMLMMLMLMLMLMLMLMR{Environment.NewLine}";
+
+
                 await CreateMission(host.Services, commandText, 4);
 
                 await host.RunAsync();
@@ -47,6 +50,16 @@ namespace RoverInTheMars
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
+
+                var innerException = ex.InnerException;
+
+                while (innerException != null)
+                {
+                    Console.WriteLine(innerException.Message);
+                    Console.WriteLine(innerException.StackTrace);
+
+                    innerException = innerException.InnerException;
+                }
             }
         }
 

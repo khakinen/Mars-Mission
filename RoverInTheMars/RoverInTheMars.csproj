@@ -18,9 +18,14 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Services\Rovers\" />
-	  <None Remove="Services\Exceptions\" />
-	  <None Remove="Services\Validators\" />
-	  <None Remove="Services\Parsers\" />
+		<None Remove="Services\Rovers\" />
+		<None Remove="Services\Exceptions\" />
+		<None Remove="Services\Validators\" />
+		<None Remove="Services\Parsers\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="input.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>
