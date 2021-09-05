@@ -15,7 +15,7 @@
 
 Remarks:
 
-* In case of move commands is sent to rovers which requires moving to the same grid square concurrently, they are waiting each other to avoid colliding. 
+* In case of move commands are being sent to rovers which require moving to the same grid square concurrently, rovers are waiting each other to avoid colliding. 
   * For instance; Rover1 got a instruction to move to Square(2,3)
   * If there is any other rover in the Square(2,3), Rover1 waits for for them
   * Rover1 will get into the Square(2,3) at the moment they left (max in 1 sec)
