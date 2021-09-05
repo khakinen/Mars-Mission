@@ -21,3 +21,12 @@ Remarks:
   * Rover1 will get into the Square(2,3) at the moment they left (max in 1 sec)
 
 * If a rover has completed its mission or fell in await-rescue case, it just waits there which means that, that grid square will be blocked forever. This case could be seen in the console logs.
+
+* Funny story about the mission of Mars:
+  * Missions are being started with missionstarter.
+  * Factories create relevant objects. 
+  * RoverDrivers drive the rovers. 
+  * RoverDrivers ask help TrafficPolice  to avoid colliding when they need to move. 
+  * So traffic police is responsible for keeping the rovers alive. 
+  * All rovers move and turn concurrently right after the mission starts.
+  * Logger always gives spoilers for the every action that happens in the Mars
