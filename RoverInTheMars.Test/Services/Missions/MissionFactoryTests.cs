@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NSubstitute;
 using RoverInTheMars.Services.Missions;
@@ -16,12 +17,14 @@ namespace RoverInTheMars.Test.Services.Missions
             _roverFactory = Substitute.For<IRoverFactory>();
         }
 
-        [InlineData("fake-command-text", 777)]
+        [InlineData("fake-command-text")]
         [Theory(DisplayName = "MissionFactory should create  mission with required number of Rover and orrect commandText ")]
-        public void CreateMissionTest(string commandText, int roverCount)
+        public void CreateMissionTest(string commandText)
         {
             var rover = Substitute.For<IRover>();
             var rovers = new List<IRover>();
+
+            var roverCount = (commandText.Split(Environment.NewLine).Length - 1) / 2;
 
             for (int i = 0; i < roverCount; i++)
             {
@@ -32,7 +35,7 @@ namespace RoverInTheMars.Test.Services.Missions
 
             var missionFactory = new MissionFactory(_roverFactory);
 
-            var mission = missionFactory.CreateMission(commandText, roverCount);
+            var mission = missionFactory.CreateMission(commandText);
 
             Assert.True(Enumerable.SequenceEqual(rovers.ToArray(), mission.Rovers));
 
