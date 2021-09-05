@@ -1,7 +1,7 @@
 # mars-mission : RoverInTheMars
 
 
-* To run in any terminal (or command prompt):
+* To run the project:  (in any terminal or command prompt of a computer which has dotnet SDK installed)
 
   * mars-mission/RoverInTheMars> **dotnet run** [ENTER]
 
