@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using RoverInTheMars.Rovers;
-using RoverInTheMars.Services;
 using RoverInTheMars.Services.Parsers;
 using RoverInTheMars.Services.Traffic;
 using RoverInTheMars.Validators;

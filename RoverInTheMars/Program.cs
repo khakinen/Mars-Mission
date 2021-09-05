@@ -3,13 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using RoverInTheMars;
 using RoverInTheMars.Rovers;
-using RoverInTheMars.Services;
 using RoverInTheMars.Services.Instructions;
 using RoverInTheMars.Services.Parsers;
 using RoverInTheMars.Services.Traffic;
@@ -29,17 +26,6 @@ namespace RoverInTheMars
                 using IHost host = CreateHostBuilder(args).Build();
 
                 var commandText = File.ReadAllText("input.txt");
-
-                //var commandText = $"5 5{Environment.NewLine}"
-                //    + $"1 2 N{Environment.NewLine}"
-                //    + $"LMLTLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMLMLMMMMRLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLMLMMLMLMLMLMLMLM{Environment.NewLine}"
-                //    + $"2 3 E{Environment.NewLine}"
-                //    + $"LMRMLMRMLMRMRMRMRMRM{Environment.NewLine}"
-                //    + $"4 3 W{Environment.NewLine}"
-                //    + $"LMLMLMLMR{Environment.NewLine}"
-                //    + $"0 3 E{Environment.NewLine}"
-                //    + $"MMLMMLMMLMLMLMLMLMLMR{Environment.NewLine}";
-
 
                 await CreateMission(host.Services, commandText, 4);
 
@@ -65,7 +51,6 @@ namespace RoverInTheMars
 
         static IHostBuilder CreateHostBuilder(string[] args) =>
           Host.CreateDefaultBuilder(args)
-           .ConfigureAppConfiguration(ConfigureApp)
            .ConfigureServices(ConfigureServices);
 
         private static async Task CreateMission(IServiceProvider services, string commandText, int roverCount, CancellationToken cancellationToken = default)
@@ -89,18 +74,12 @@ namespace RoverInTheMars
             await mission.Start(commandText, rovers.ToArray(), cancellationToken);
         }
 
-        private static void ConfigureApp(HostBuilderContext hostBuilderContext, IConfigurationBuilder configurationBuilder)
-        {
-            var env = hostBuilderContext.HostingEnvironment;
-        }
-
         private static void ConfigureServices(HostBuilderContext hostBuilderContext, IServiceCollection services)
         {
             var configuration = hostBuilderContext.Configuration;
 
             services.AddLogging(logging =>
             {
-                logging.AddConfiguration(configuration.GetSection("Logging"));
                 logging.AddConsole();
             });
 
@@ -119,7 +98,7 @@ namespace RoverInTheMars
                 .AddTransient<IInstructionProcessor, MoveInstructionProcessor>()
 
                 .AddSingleton<ITrafficPolice, TrafficPolice>()
-               .AddSingleton<TrafficeConfiguration>(new TrafficeConfiguration() { MovementAttemptDelayInMiliseconds = 1000 });
+               .AddSingleton(new TrafficeConfiguration() { MovementAttemptDelayInMiliseconds = 1000 });
         }
     }
 }

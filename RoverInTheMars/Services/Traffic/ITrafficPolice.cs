@@ -9,6 +9,7 @@ namespace RoverInTheMars.Services.Traffic
     public interface ITrafficPolice
     {
         void Start(Dimension plateauDimension, IEnumerable<Position> initialPositions);
+
         Task PlaceSafe(string name, Position currentPosition, Position nextPosition, Action action, CancellationToken cancellationToken = default);
     }
 }

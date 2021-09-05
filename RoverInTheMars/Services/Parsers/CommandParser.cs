@@ -40,7 +40,6 @@ namespace RoverInTheMars.Services.Parsers
             catch (Exception ex)
             {
                 throw new InvalidCommandException(ex);
-                //return await Task.FromException<Command>(new InvalidCommandException(ex));
             }
 
         }
