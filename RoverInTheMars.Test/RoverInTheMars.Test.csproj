@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.9.4" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="coverlet.collector" Version="3.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="NSubstitute" Version="4.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RoverInTheMars\RoverInTheMars.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="NSubstitute" />
+    <None Remove="Services\" />
+    <None Remove="Services\Instructions\" />
+    <None Remove="Services\Missions\" />
+    <None Remove="Services\Rovers\" />
+    <None Remove="Services\Parsers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Services\Instructions\" />
+    <Folder Include="Services\Missions\" />
+    <Folder Include="Services\Rovers\" />
+    <Folder Include="Services\Parsers\" />
+  </ItemGroup>
+</Project>

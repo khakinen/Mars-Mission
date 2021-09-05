@@ -5,7 +5,7 @@ using RoverInTheMars.Models;
 using RoverInTheMars.Services.Instructions;
 using RoverInTheMars.Services.Traffic;
 
-namespace RoverInTheMars.Rovers
+namespace RoverInTheMars.Services.Rovers
 {
     public class RoverDriver : IRoverDriver
     {
@@ -33,6 +33,7 @@ namespace RoverInTheMars.Rovers
         {
             try
             {
+                Name = roverName;
                 _currentPosition = roverCommand.InitialPosition;
 
                 for (int i = 0; i < roverCommand.Instructions.Length; i++)

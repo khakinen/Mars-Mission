@@ -1,4 +1,4 @@
-﻿namespace RoverInTheMars
+﻿namespace RoverInTheMars.Services.Rovers
 {
     public enum RoverStatus
     {

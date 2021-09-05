@@ -13,14 +13,21 @@
 		<Folder Include="Services\Exceptions\" />
 		<Folder Include="Services\Validators\" />
 		<Folder Include="Services\Parsers\" />
+		<Folder Include="Services\Missions\" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Services\Rovers\" />
-	  <None Remove="Services\Exceptions\" />
-	  <None Remove="Services\Validators\" />
-	  <None Remove="Services\Parsers\" />
+		<None Remove="Services\Rovers\" />
+		<None Remove="Services\Exceptions\" />
+		<None Remove="Services\Validators\" />
+		<None Remove="Services\Parsers\" />
+		<None Remove="Services\Missions\" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="input.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 	</ItemGroup>
 </Project>

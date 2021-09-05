@@ -6,8 +6,8 @@ namespace RoverInTheMars.Validators
     {
         public void Validate(Command command, int roversCount)
         {
-            if (command.RowerCommands.Length > roversCount)
-                throw new InvalidCommandException();
+            if (command.RoverCommands.Length > roversCount)
+                throw new InvalidCommandException("Deployed rover count is not enough to accomplish this mission!");
         }
     }
 }

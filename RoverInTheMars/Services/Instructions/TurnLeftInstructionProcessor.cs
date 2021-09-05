@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using RoverInTheMars.Models;
+﻿using RoverInTheMars.Models;
 
 namespace RoverInTheMars.Services.Instructions
 {

@@ -8,6 +8,15 @@ namespace RoverInTheMars.Services.Parsers
 {
     public class CommandParser : ICommandParser
     {
+        private readonly IContentParser<Dimension> _plateauDimensionParser;
+        private readonly IContentParser<RoverCommand> _roverCommandParser;
+
+        public CommandParser(IContentParser<Dimension> plateauDimensionParser, IContentParser<RoverCommand> roverCommandParser)
+        {
+            _plateauDimensionParser = plateauDimensionParser;
+            _roverCommandParser = roverCommandParser;
+        }
+
         public async Task<Command> Parse(string commandText)
         {
             try
@@ -16,47 +25,30 @@ namespace RoverInTheMars.Services.Parsers
 
                 using (var stringReader = new StringReader(commandText))
                 {
-                    var line = (await stringReader.ReadLineAsync()).Split(' ');
+                    var line = await stringReader.ReadLineAsync();
 
-                    command.PlateauDimension = new Dimension()
-                    {
-                        Height = int.Parse(line[0]),
-                        Width = int.Parse(line[1])
-                    };
+                    command.PlateauDimension = _plateauDimensionParser.Parse(new string[] { line });
 
                     var roverCommands = new List<RoverCommand>();
 
-                    while ((line = (await stringReader.ReadLineAsync())?.Split(' ')) != null)
+                    while ((line = (await stringReader.ReadLineAsync())) != null)
                     {
-                        roverCommands.Add(await GetRoverCommand(stringReader, line));
+                        var roverCommand = _roverCommandParser.Parse(new string[] { line, (await stringReader.ReadLineAsync()) });
+
+                        roverCommands.Add(roverCommand);
                     }
 
-                    command.RowerCommands = roverCommands.ToArray();
+                    command.RoverCommands = roverCommands.ToArray();
                 }
 
                 return command;
-
             }
             catch (Exception ex)
             {
-                return await Task.FromException<Command>(new InvalidCommandException(ex));
+                throw new InvalidCommandException(ex);
             }
 
         }
-
-        private async Task<RoverCommand> GetRoverCommand(StringReader stringReader, string[] line)
-        {
-            return new RoverCommand
-            {
-                InitialPosition = new Position
-                {
-                    X = int.Parse(line[0]),
-                    Y = int.Parse(line[1]),
-                    Direction = Enum.Parse<Direction>(line[2])
-                },
-
-                Instructions = (await stringReader.ReadLineAsync()).ToCharArray()
-            };
-        }
     }
 }
+
