@@ -1,1 +1,19 @@
-RoverInTheMars
+# mars-mission : RoverInTheMars
+
+
+* To run in any terminal (or command prompt):
+
+  * mars-mission/RoverInTheMars> **dotnet run** [ENTER]
+
+* To run the tests:
+
+  * mars-mission/RoverInTheMars.Test> **dotnet test** [ENTER]
+
+Remarks:
+
+* In case of move commands is sent to rovers which requires moving to the same grid square concurrently, they are waiting each other to avoid colliding. 
+  * For instance; Rover1 got a instruction to move to Square(2,3)
+  * If there is any other rover in the Square(2,3), Rover1 waits for for them
+  * Rover1 will get into the Square(2,3) at the moment they left (max in 1 sec)
+
+* If a rover has completed its mission or fell in await-rescue case, it just waits there which means that, that grid square will be blocked forever. This case could be seen in the console logs.
